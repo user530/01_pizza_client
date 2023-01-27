@@ -3,6 +3,9 @@ const reducer = (state, action) => {
     case "CLEAR_CART": {
       return { ...state, cart: [] };
     }
+    case "ADD_TO_CART": {
+      return { ...state, cart: [...state.cart, action.payload] };
+    }
     default: {
       return { ...state };
     }

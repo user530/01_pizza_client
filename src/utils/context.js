@@ -8,12 +8,19 @@ const InitialState = { isLoading: false, test: true, cart: [] };
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, InitialState);
 
+  const addToCart = React.useCallback(
+    (packageInfo) => {
+      dispatch({ type: "ADD_TO_CART", payload: packageInfo });
+    },
+    [state.cart]
+  );
+
   const clearCart = React.useCallback(() => {
     dispatch({ type: "CLEAR_CART" });
-  }, state.cart);
+  }, [state.cart]);
 
   return (
-    <AppContext.Provider value={{ ...state, clearCart }}>
+    <AppContext.Provider value={{ ...state, addToCart, clearCart }}>
       {children}
     </AppContext.Provider>
   );

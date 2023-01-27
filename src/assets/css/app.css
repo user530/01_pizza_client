@@ -3331,6 +3331,11 @@ form.personal-data {
     line-height: 1;
 }
 
+.banner-slider{
+    position: relative;
+    overflow: hidden;
+}
+/* 
 .banner-slider .owl-nav {
     position: absolute;
     top: 50%;
@@ -3349,16 +3354,16 @@ form.personal-data {
     font-size: 30px;
     z-index: 2;
     display: none;
-}
+} */
 
-@media (max-width: 1439px) {
+/* @media (max-width: 1439px) {
     .banner-slider .owl-nav {
         left: 2%;
         right: 2%;
     }
-}
+} */
 
-@media (max-width: 1199px) {
+/* @media (max-width: 1199px) {
     .banner-slider .owl-nav {
         display: none;
     }
@@ -3420,7 +3425,7 @@ form.personal-data {
 
 .banner-slider .owl-dots .owl-dot:hover {
     background-color: #fbd10e;
-}
+} */
 
 .section-info .text-block__img {
     background-position: center;
@@ -5048,7 +5053,7 @@ form.personal-data {
     justify-content: space-between;
 }
 
-.product-card__prises {
+.product-card__prices {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

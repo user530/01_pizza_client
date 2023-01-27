@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
-import logoMenu from "../assets/img/logo-menu.png";
-// import { FaViber, FaTelegram, FaWhatsapp, FaInstagram } from "react-icons/fa";
+// import logoMenu from "../assets/img/logo-menu.png";
+
 import { SlLogin, SlBasket, SlBasketLoaded } from "react-icons/sl";
 
 // Get access to the context
