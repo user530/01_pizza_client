@@ -1,19 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
-// import logoMenu from "../assets/img/logo-menu.png";
+import logoMenu from "../assets/img/logo-menu.png";
 
 import { SlLogin, SlBasket, SlBasketLoaded } from "react-icons/sl";
+import { GrMenu, GrClose } from "react-icons/gr";
 
 // Get access to the context
 import { useAppContext } from "../utils/context";
 
 const Header = ({ workingHours, socialIcons, phone, menu }) => {
   const { cart } = useAppContext();
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  const openMenu = () => {
-    console.log("OPEN MENU CLICKED!");
+  const mobMenuToggle = () => {
+    setIsMobile(!isMobile);
+    document.body.classList.toggle("noscroll");
   };
+
+  const createIcons = () =>
+    socialIcons.map((iconObj, index) => (
+      <a key={index} href={iconObj.link} target={"_blank"}>
+        {iconObj.icon}
+      </a>
+    ));
+
+  const resizeListener = () => {
+    if (window.innerWidth > 1199) {
+      setIsMobile(false);
+      document.body.classList.remove("noscroll");
+    }
+  };
+
+  React.useEffect(() => {
+    const ln = window.addEventListener("resize", resizeListener);
+
+    return document.removeEventListener("resize", ln);
+  }, []);
 
   return (
     <header className="header">
@@ -31,20 +54,24 @@ const Header = ({ workingHours, socialIcons, phone, menu }) => {
                   </div>
                   <div className="working-hours__info">{workingHours.info}</div>
                 </div>
-                <div className="social-icons">
-                  {socialIcons.map((iconObj, index) => (
-                    <a key={index} href={iconObj.link} target={"_blank"}>
-                      {iconObj.icon}
-                    </a>
-                  ))}
-                </div>
+                <div className="social-icons">{createIcons()}</div>
               </div>
-              <ul className="header-menu">
+              <ul className={`header-menu ${isMobile ? "active" : ""}`}>
+                <li className="menu-logo">
+                  <Link to={"/"}>
+                    <img src={logoMenu} alt="small-logo" />
+                  </Link>
+                </li>
+
                 {menu.map((menuItem, index) => (
                   <li key={index} className={index === 0 ? "first active" : ""}>
                     <Link to={menuItem.link}>{menuItem.title}</Link>
                   </li>
                 ))}
+
+                <div className="menu-social">
+                  <div className="social-icons">{createIcons()}</div>
+                </div>
               </ul>
             </div>
           </div>
@@ -78,13 +105,14 @@ const Header = ({ workingHours, socialIcons, phone, menu }) => {
                   </Link>
                 </div>
               </div>
-              <div className="menu-toggle" onClick={openMenu}>
-                <span></span>
+              <div className="menu-toggle" onClick={mobMenuToggle}>
+                {isMobile ? <GrClose size={35} /> : <GrMenu size={35} />}
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div id="overlay" className={isMobile ? "active" : ""}></div>
     </header>
   );
 };
