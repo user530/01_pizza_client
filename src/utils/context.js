@@ -3,10 +3,19 @@ import reducer from "./reducer";
 
 const AppContext = React.createContext();
 
-const InitialState = { isLoading: false, test: true, cart: [] };
+const InitialState = { isLoading: false, isAuthorized: false, cart: [] };
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, InitialState);
+
+  const relogin = () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      // fetch
+      // setIsAuthorized
+      // setCart
+    }
+  };
 
   const addToCart = React.useCallback(
     (packageInfo) => {
@@ -18,6 +27,10 @@ export const AppContextProvider = ({ children }) => {
   const clearCart = React.useCallback(() => {
     dispatch({ type: "CLEAR_CART" });
   }, [state.cart]);
+
+  React.useEffect(() => {
+    relogin();
+  }, []);
 
   return (
     <AppContext.Provider value={{ ...state, addToCart, clearCart }}>
