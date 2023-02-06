@@ -48,7 +48,7 @@ const ProductListContent = ({ products }) => {
   return (
     <div className="menu-products__content">
       {isEmpty ? (
-        <div className="row">NO PRODUCTS TO SHOW...</div>
+        <p className="no-products">NO PRODUCTS TO SHOW...</p>
       ) : (
         <div className="row">
           {visibleProducts.map((product) => {
@@ -58,14 +58,20 @@ const ProductListContent = ({ products }) => {
       )}
 
       {pages > 1 ? (
-        <div className="row">
+        <div className="product-pages-row">
           {
-            <div>
-              <button onClick={prevPageHandler}>
+            <div className="product-pages-container">
+              <button
+                className="product-pages-control"
+                onClick={prevPageHandler}
+              >
                 <FaChevronLeft />
               </button>
-              <span>{curPage}</span>
-              <button onClick={nextPageHandler}>
+              <span className="product-pages-counter">{curPage}</span>
+              <button
+                className="product-pages-control"
+                onClick={nextPageHandler}
+              >
                 <FaChevronRight />
               </button>
             </div>

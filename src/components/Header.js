@@ -92,6 +92,7 @@ const Header = ({ workingHours, socialIcons, phone, menu }) => {
                     <SlLogin />
                   </Link>
                 </div>
+
                 <div className="user-basket">
                   <Link to={"/cart"}>
                     {cart && cart.length > 0 ? (

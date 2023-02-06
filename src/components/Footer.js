@@ -1,14 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { YMaps, Map } from "@pbe/react-yandex-maps";
-import { FiMail } from "react-icons/fi";
 import logo from "../assets/img/logo-footer.png";
 
-const Footer = ({ workingHours, socialIcons, phone, address, copyright }) => {
-  const contactBtn = () => {
-    console.log("CONTACT BTN ACTION");
-  };
+import ContactUs from "./ContactUs";
 
+const Footer = ({ workingHours, socialIcons, phone, address, copyright }) => {
   return (
     <footer id="footer" className="footer">
       <YMaps>
@@ -56,10 +53,7 @@ const Footer = ({ workingHours, socialIcons, phone, address, copyright }) => {
                 </div>
               </div>
 
-              <button className="page-btn2" onClick={contactBtn}>
-                <span>Написать нам</span>
-                <FiMail className="far fa-envelope" />
-              </button>
+              <ContactUs />
 
               <div className="copyright-text">
                 <span>{copyright.first}</span>

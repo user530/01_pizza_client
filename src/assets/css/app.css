@@ -2676,6 +2676,54 @@ form.personal-data {
     fill: #fbd10e;
 }
 
+.cart-content{
+    position: absolute;
+    padding: 20px;
+    height: 300px;
+    min-width: 360px;
+    border: 1px solid red;
+    bottom: -10px;
+    right: 0;
+    transform:translateY(100%);
+    background-color: white;
+    z-index: 3;
+}
+
+.cart-content li{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.cart-content__img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.cart-content p{
+    font-size: 16px;
+}
+
+.cart-content__title{
+    font-size: 20px;
+    font-weight: 700;
+    flex-grow: 1;
+}
+
+.cart-content__amount{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    flex-shrink: 0;
+}
+
+.cart-content__cost{
+    width: 80px;
+    flex-shrink: 0;
+}
+
 .user-basket a svg {
     height: 35px;
     width: 35px;
@@ -2952,10 +3000,9 @@ form.personal-data {
 
 /*****ГЛАВНАЯ - СЕКЦИЯ КАРТОЧКИ МЕНЮ****/
 .main-menu {
-    padding-top: 95px;
-    padding-top: 145px;
+    padding-top: 100px;
     margin-top: -55px;
-    padding-bottom: 90px;
+    padding-bottom: 45px;
     color: #1f1f1f;
     position: relative;
 }
@@ -5511,4 +5558,148 @@ svg.left-arr {
 
 .social-icons a:hover {
     opacity: .7;
+}
+
+.custom-modal-overlay.visible{
+    display: flex;
+}
+
+.custom-modal-overlay{
+    display: none; /* CHANGE LATER*/
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 100;
+    font-family: sans-serif;
+}
+
+.custom-modal-content{
+    position: relative;
+    width: 95%;
+    min-height: 400px;
+    margin: auto;
+    max-width: 570px;
+    background-color: white;
+    padding: 30px 45px;
+    color: #000;
+    font-size: 18px;
+}
+
+button{
+    background-color: transparent;
+    outline: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.custom-modal-close:hover{
+    opacity: 0.5;
+}
+
+.custom-modal-close{
+    position:absolute;
+    top: 15px;
+    right:15px;
+    font-size: 26px;
+}
+
+.custom-modal-header{
+    text-align: center;
+}
+
+.custom-modal-title{
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.custom-modal-body{
+    padding-bottom: 10px;
+    padding-top: 40px;
+}
+
+.custom-modal-body .form-field{
+    margin-bottom: 20px;
+}
+
+.custom-modal-body .form-field input[type="text"]{
+    display: block; 
+    height: 40px;
+    width: 100%;
+    border-bottom: 1px solid #777;
+}
+
+.custom-modal-body .form-field .input-error{
+    display: none;
+    font-size: 13px;
+    color: red
+}
+
+.custom-modal-body .form-field input.incorrect{
+    border-bottom: 1px solid red;
+    color: red;
+}
+
+.custom-modal-body .form-field input.incorrect ~ .input-error{
+    display: block;
+}
+
+.custom-modal-body .form-field textarea{
+    display: block;
+    height: 120px;
+    width: 100%;
+    padding: 15px 0px;
+    border-bottom: 1px solid #777;
+}
+
+.custom-modal-body .permission-field{
+    display: inline-block;
+}
+
+.custom-modal-body .permission-field input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    margin-right: 15px;
+}
+
+.custom-modal-body button[type="submit"] {
+    height: 48px;
+    width: 100%;
+    background-color: #fbd10e;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.product-pages-row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+
+.product-pages-container {
+    display: flex;
+    align-items: center;
+}
+
+.product-pages-counter {
+    line-height: 1;
+}
+
+.product-pages-control{
+    display: flex;
+    align-items: center;
+}
+
+.no-products{
+    text-align: center;
+    font-size: 48px;
+    font-weight: bold;
+}
+
+.contact-success{
+    min-height: auto;
 }

@@ -18,7 +18,6 @@ const Slider = ({ children }) => {
     const interval = setInterval(() => {
       setActiveInd(nextInd);
     }, 3000);
-
     return () => clearInterval(interval);
   }, [activeInd]);
 
@@ -33,6 +32,10 @@ const Slider = ({ children }) => {
               className={`slider-item ${
                 ind === activeInd ? "slider-item-active" : ""
               }`}
+              onMouseDown={(e) => console.log(e)}
+              onMouseUp={(e) => console.log(e)}
+              onTouchStart={(e) => console.log(e.changedTouches[0].screenX)}
+              onTouchEnd={(e) => console.log(e.changedTouches[0].screenX)}
             >
               {childElem}
             </div>
