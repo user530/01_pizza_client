@@ -3,18 +3,24 @@ import reducer from "./reducer";
 
 const AppContext = React.createContext();
 
-const InitialState = { isLoading: false, isAuthorized: false, cart: [] };
+const InitialState = { isLoading: false, user: null, cart: [] };
 
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, InitialState);
 
-  const relogin = () => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      // fetch
-      // setIsAuthorized
-      // setCart
+  const login = async () => {
+    dispatch({ action: "START_LOADING" });
+    try {
+      const response = await fetch("/api/v1/users/get_me");
+      const user = await response.json();
+
+      console.log(user);
+    } catch (error) {
+      console.log("USER NOT FOUND");
+      dispatch({ action: "SET_USER", payload: null });
     }
+
+    dispatch({ action: "STOP_LOADING" });
   };
 
   const addToCart = React.useCallback(
@@ -29,7 +35,7 @@ export const AppContextProvider = ({ children }) => {
   }, [state.cart]);
 
   React.useEffect(() => {
-    relogin();
+    login();
   }, []);
 
   return (

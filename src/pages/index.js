@@ -6,6 +6,8 @@ import News from "./News";
 import Special from "./Special";
 import About from "./About";
 import Contact from "./Contact";
+import Authorization from "./Authorization";
+import User from "./User";
 import PageNotFound from "./404";
 
 export {
@@ -18,4 +20,6 @@ export {
   About,
   Contact,
   PageNotFound,
+  Authorization,
+  User,
 };

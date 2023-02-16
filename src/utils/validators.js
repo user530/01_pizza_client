@@ -40,3 +40,43 @@ export const contactValidation = (formValuesObj, permissionFlag) => {
 
   return validation_errors;
 };
+
+export const loginValidation = (formValues) => {
+  let { login, password } = formValues;
+
+  login = login.toString().trim();
+  password = password.toString().trim();
+
+  let loginErrors = {};
+
+  // Validate login
+  if (login === "")
+    loginErrors = {
+      ...loginErrors,
+      login: "Пожалуйста, введите логин!",
+    };
+  else if (!/^\S{3,16}$/.test(login))
+    loginErrors = {
+      ...loginErrors,
+      login: "Логин должен содержать от 3 до 16 символов без пробелов!",
+    };
+
+  // Validate password
+  if (password === "")
+    loginErrors = {
+      ...loginErrors,
+      password: "Пожалуйста, введите пароль!",
+    };
+  else if (
+    !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&])[A-z\d!@#$%^&]{6,}$/.test(
+      password
+    )
+  )
+    loginErrors = {
+      ...loginErrors,
+      password:
+        "Допустимы символы латинского алфавита, цифры и специальные символы(!,@,#,$,%,^,&). Пароль должен быть не меньше 6 символов и содержать как минимум одну заглавную и одну прописную букву, одну цифру и один спец символ.",
+    };
+
+  return loginErrors;
+};

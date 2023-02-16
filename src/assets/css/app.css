@@ -444,21 +444,21 @@ input {
     }
 }
 
-.autorization-page {
+.authorization-page {
     padding-bottom: 80px;
 }
 
 @media (max-width: 1199px) {
-    .autorization-page {
+    .authorization-page {
         padding-bottom: 30px;
     }
 }
 
-.autorization-page .form-group input {
+.authorization-page .form-group input {
     background-color: transparent;
 }
 
-.autorization-page .form-group p {
+.authorization-page .form-group p {
     font-size: 12px;
     line-height: 19px;
     margin-top: 10px;

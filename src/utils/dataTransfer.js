@@ -1,5 +1,5 @@
 export async function getProductTypes() {
-  const prodTypesURL = "http://localhost:5000/api/v1/product_types";
+  const prodTypesURL = "/api/v1/product_types";
 
   const response = await fetch(prodTypesURL);
   const data = await response.json();
@@ -22,7 +22,7 @@ export async function getProductTypes() {
 }
 
 export async function getAllProducts() {
-  const productsURL = "http://localhost:5000/api/v1/products";
+  const productsURL = "/api/v1/products";
 
   const response = await fetch(productsURL);
   const data = await response.json();
@@ -70,7 +70,7 @@ export async function getAllProducts() {
 }
 
 export async function sendContactForm(data, signal) {
-  const URL = "http://localhost:5000/api/v1/contact";
+  const URL = "/api/v1/contact";
 
   try {
     const response = await fetch(URL, {
@@ -88,6 +88,35 @@ export async function sendContactForm(data, signal) {
 
     return { success: false };
   } catch (error) {
+    throw Error(
+      "В данный момент сервер не смог обработать ваше обращение, пожалуйста, повторите вашу попытку позже."
+    );
+  }
+}
+
+export async function login(formData, signal) {
+  const loginURL = "/api/v1/auth/login";
+
+  try {
+    const response = await fetch(
+      loginURL,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+      // { signal }
+    );
+
+    const data = await response.json();
+
+    if (data.success) return data;
+
+    return null;
+  } catch (error) {
+    console.log(error);
     throw Error(
       "В данный момент сервер не смог обработать ваше обращение, пожалуйста, повторите вашу попытку позже."
     );

@@ -12,6 +12,8 @@ import {
   About,
   Contact,
   PageNotFound,
+  Authorization,
+  User,
 } from "./pages";
 
 import { Header, Footer } from "./components";
@@ -87,6 +89,8 @@ function App() {
         <Route path="/news/:special" element={<Special />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/authorization" element={<Authorization />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Footer

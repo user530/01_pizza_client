@@ -39,11 +39,16 @@ const useContactModal = (validator, callback) => {
       callback(formValues, controller.signal)
         .then((res) => {
           if (res.success) setIsSubmitted(true);
-          else alert();
+          else
+            alert(
+              "В процессе отправки произошла ошибка, пожалуйста, повторите ваш запрос позднее."
+            );
         })
         .catch((err) => {
           console.log(err);
-          alert("В процессе ");
+          alert(
+            "В процессе отправки произошла ошибка, пожалуйста, повторите ваш запрос позднее."
+          );
         });
 
     return () => controller.abort();

@@ -9,7 +9,6 @@ import slider4 from "../assets/img/main_slider/wok.jpg";
 const MainBanner = () => {
   return (
     <section id="banner" className="banner">
-      <div className="hidden-layout"></div>
       <Slider>
         <img src={slider1} alt="slide1" />
         <img src={slider2} alt="slide2" />

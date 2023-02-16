@@ -1,10 +1,12 @@
 import React from "react";
 
-import MainBanner from "../components/MainBanner";
-import MainMenu from "../components/MainMenu";
-import MainCTA from "../components/MainCTA";
-import MainBenefits from "../components/MainBenefits";
-import MainAbout from "../components/MainAbout";
+import {
+  MainBanner,
+  MainMenu,
+  MainCTA,
+  MainBenefits,
+  MainAbout,
+} from "../components";
 
 const Index = () => {
   return (

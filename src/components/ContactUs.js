@@ -5,7 +5,7 @@ import ContactSuccess from "./ContactSuccess";
 
 import { FiMail } from "react-icons/fi";
 
-import useContactModal from "./customHooks/useContactModal";
+import { useContactModal } from "./customHooks";
 import { contactValidation } from "../utils/validators";
 import { sendContactForm } from "../utils/dataTransfer";
 
