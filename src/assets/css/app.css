@@ -5631,22 +5631,22 @@ button{
     border-bottom: 1px solid #777;
 }
 
-.custom-modal-body .form-field .input-error{
+.form-field .input-error{
     display: none;
     font-size: 13px;
     color: red
 }
 
-.custom-modal-body .form-field input.incorrect{
+.form-field input.incorrect{
     border-bottom: 1px solid red;
     color: red;
 }
 
-.custom-modal-body .form-field input.incorrect ~ .input-error{
+.form-field input.incorrect ~ .input-error{
     display: block;
 }
 
-.custom-modal-body .form-field textarea{
+.form-field textarea{
     display: block;
     height: 120px;
     width: 100%;

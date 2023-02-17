@@ -97,28 +97,26 @@ export async function sendContactForm(data, signal) {
 export async function login(formData, signal) {
   const loginURL = "/api/v1/auth/login";
 
-  try {
-    const response = await fetch(
-      loginURL,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-      // { signal }
-    );
+  // try {
+  const response = await fetch(
+    loginURL,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    },
+    { signal }
+  );
 
-    const data = await response.json();
+  const data = await response.json();
 
-    if (data.success) return data;
+  if (data.success) return data;
+  else throw new Error(data.error.message);
 
-    return null;
-  } catch (error) {
-    console.log(error);
-    throw Error(
-      "В данный момент сервер не смог обработать ваше обращение, пожалуйста, повторите вашу попытку позже."
-    );
-  }
+  // }
+  // catch (error) {
+  //   throw new Error(error.message);
+  // }
 }

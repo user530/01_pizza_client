@@ -45,10 +45,7 @@ const useContactModal = (validator, callback) => {
             );
         })
         .catch((err) => {
-          console.log(err);
-          alert(
-            "В процессе отправки произошла ошибка, пожалуйста, повторите ваш запрос позднее."
-          );
+          console.error(err);
         });
 
     return () => controller.abort();

@@ -8,38 +8,39 @@ const InitialState = { isLoading: false, user: null, cart: [] };
 export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(reducer, InitialState);
 
-  const login = async () => {
-    dispatch({ action: "START_LOADING" });
-    try {
-      const response = await fetch("/api/v1/users/get_me");
-      const user = await response.json();
-
-      console.log(user);
-    } catch (error) {
-      console.log("USER NOT FOUND");
-      dispatch({ action: "SET_USER", payload: null });
-    }
-
-    dispatch({ action: "STOP_LOADING" });
+  const setUser = (user) => {
+    dispatch({ type: "SET_USER", payload: user });
   };
 
-  const addToCart = React.useCallback(
-    (packageInfo) => {
-      dispatch({ type: "ADD_TO_CART", payload: packageInfo });
-    },
-    [state.cart]
-  );
+  const login = async () => {
+    dispatch({ type: "START_LOADING" });
+    try {
+      const response = await fetch("/api/v1/users/get_me");
+      const data = await response.json();
 
-  const clearCart = React.useCallback(() => {
-    dispatch({ type: "CLEAR_CART" });
-  }, [state.cart]);
+      if (data.success && data.data) {
+        const { user } = data.data;
+        setUser(user);
+      }
+    } catch (error) {
+      console.log(error.message);
+      setUser(null);
+    }
+
+    dispatch({ type: "STOP_LOADING" });
+  };
+
+  const addToCart = (packageInfo) =>
+    dispatch({ type: "ADD_TO_CART", payload: packageInfo });
+
+  const clearCart = () => dispatch({ type: "CLEAR_CART" });
 
   React.useEffect(() => {
     login();
   }, []);
 
   return (
-    <AppContext.Provider value={{ ...state, addToCart, clearCart }}>
+    <AppContext.Provider value={{ ...state, addToCart, clearCart, setUser }}>
       {children}
     </AppContext.Provider>
   );

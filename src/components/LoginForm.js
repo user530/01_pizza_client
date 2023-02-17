@@ -4,7 +4,7 @@ import { loginValidation } from "../utils/validators";
 import { login } from "../utils/dataTransfer";
 
 const LoginForm = () => {
-  const { handleInput, handleSubmit, errors } = useLoginForm(
+  const { handleInput, handleSubmit, errors, unauthorized } = useLoginForm(
     loginValidation,
     login
   );
@@ -13,24 +13,44 @@ const LoginForm = () => {
     <>
       <h3>Авторизация:</h3>
       <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <input type="text" name="user-login" onChange={handleInput} />
+        <div className="form-group form-field">
+          <input
+            type="text"
+            name="user-login"
+            className={`form-field-text ${
+              errors.login || unauthorized ? "incorrect" : ""
+            }`}
+            onChange={handleInput}
+          />
 
-          {errors.login ? (
+          {errors.login || unauthorized ? (
             <span className="input-error">{errors.login}</span>
           ) : null}
         </div>
 
-        <div className="form-group">
-          <input type="text" name="user-password" onChange={handleInput} />
+        <div className="form-group form-field">
+          <input
+            type="text"
+            name="user-password"
+            className={`form-field-text ${
+              errors.password || unauthorized ? "incorrect" : ""
+            }`}
+            onChange={handleInput}
+          />
 
-          {errors.password ? (
+          {errors.password || unauthorized ? (
             <span className="input-error">{errors.password}</span>
           ) : null}
         </div>
 
         <input type="submit" value={"Вход"} />
       </form>
+
+      {unauthorized ? (
+        <div>
+          <span>Авторизация провалилась, проверьте ваши данные.</span>
+        </div>
+      ) : null}
     </>
   );
 };

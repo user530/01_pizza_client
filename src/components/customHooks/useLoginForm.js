@@ -1,12 +1,16 @@
 import React from "react";
 
+// Get access to the context
+import { useAppContext } from "../../utils/context";
+
 const useLoginForm = (validator, callback) => {
   const [formValues, setFormValues] = React.useState({
     login: "",
     password: "",
   });
-
+  const [unauthorized, setUnauthorized] = React.useState(false);
   const [errors, setErrors] = React.useState({});
+  const { setUser } = useAppContext();
 
   const handleInput = (e) => {
     e.preventDefault();
@@ -34,18 +38,21 @@ const useLoginForm = (validator, callback) => {
     if (login && password && Object.keys(errors).length === 0) {
       callback(formValues, abortController.signal)
         .then((res) => {
-          console.log(res);
+          setUser(res.data.user);
+          // LOAD CART
+          setUnauthorized(false);
+          // REDIRECT
         })
         .catch((err) => {
-          console.error(err);
-          alert(err.message);
+          console.error(err.message);
+          setUnauthorized(true);
         });
     }
 
     return abortController.abort();
   }, [errors]);
 
-  return { formValues, handleInput, handleSubmit, errors };
+  return { formValues, handleInput, handleSubmit, errors, unauthorized };
 };
 
 export default useLoginForm;
