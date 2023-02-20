@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png";
 import logoMenu from "../assets/img/logo-menu.png";
 
-import { SlUser, SlLogin, SlBasket, SlBasketLoaded } from "react-icons/sl";
+import LoginDropdown from "./LoginDropdown";
+
+import { SlLogin, SlBasket, SlBasketLoaded } from "react-icons/sl";
 import { GrMenu, GrClose } from "react-icons/gr";
 
 // Get access to the context
@@ -95,9 +97,7 @@ const Header = ({ workingHours, socialIcons, phone, menu }) => {
                 <div className="user-controls">
                   <div className="user-log-in">
                     {user ? (
-                      <Link to={"/user"}>
-                        <SlUser />
-                      </Link>
+                      <LoginDropdown />
                     ) : (
                       <Link to={"/authorization"}>
                         <SlLogin />

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // Get access to the context
 import { useAppContext } from "../../utils/context";
@@ -11,6 +12,8 @@ const useLoginForm = (validator, callback) => {
   const [unauthorized, setUnauthorized] = React.useState(false);
   const [errors, setErrors] = React.useState({});
   const { setUser } = useAppContext();
+
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     e.preventDefault();
@@ -41,7 +44,8 @@ const useLoginForm = (validator, callback) => {
           setUser(res.data.user);
           // LOAD CART
           setUnauthorized(false);
-          // REDIRECT
+          // Redirect back to the previous page
+          navigate(-1);
         })
         .catch((err) => {
           console.error(err.message);

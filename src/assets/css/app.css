@@ -2647,7 +2647,6 @@ form.personal-data {
     -ms-flex-align: center;
     align-items: center;
     width: 100%;
-    font-size: 0;
     line-height: 1;
     position: relative;
     min-width: 90px;
@@ -5702,4 +5701,41 @@ button{
 
 .contact-success{
     min-height: auto;
+}
+
+.login-block{
+    position: relative;
+}
+
+.login-icon img{
+    border: 2px solid #2a7fd7;
+}
+
+.login-icon img:hover{
+    border: 2px solid #fbd10e;
+}
+
+.login-dropdown{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translateY(102%);
+    background-color: white    ;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.dropdown-item{
+    padding-top: 5px;
+    border-bottom: 1px solid transparent;
+}
+
+.dropdown-item a{
+    text-decoration: none;
+    color: black
+}
+
+.dropdown-item:hover{
+    cursor: pointer;
+    border-bottom: 1px solid black;
 }

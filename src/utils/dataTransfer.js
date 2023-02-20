@@ -97,7 +97,6 @@ export async function sendContactForm(data, signal) {
 export async function login(formData, signal) {
   const loginURL = "/api/v1/auth/login";
 
-  // try {
   const response = await fetch(
     loginURL,
     {
@@ -114,9 +113,4 @@ export async function login(formData, signal) {
 
   if (data.success) return data;
   else throw new Error(data.error.message);
-
-  // }
-  // catch (error) {
-  //   throw new Error(error.message);
-  // }
 }
