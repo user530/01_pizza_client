@@ -1,97 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useAppContext } from "../utils/context";
+import useProductListCard from "./customHooks/useProductListCard";
 
 const ProductListCard = ({ product }) => {
   const {
     id,
     name,
-    weight,
-    options,
     ingredients,
-    price,
-    specialPrice,
-    tags,
     img,
-  } = product;
+    variantData,
+    amount,
+    options,
+    curOptions,
+    updateCurOptions,
+    counterMinus,
+    counterPlus,
+    buyHandler,
+  } = useProductListCard(product);
 
-  const [productAmount, setProductAmount] = React.useState(1);
-  const [productOptions, setProductOptions] = React.useState([]);
-
-  const initialOptions = Object.fromEntries(
-    options.map((optObj) => {
-      return [optObj.title, optObj.options[0]];
-    })
-  );
-
-  const { addToCart } = useAppContext();
-
-  //   Handle counter btns
-  const counterMinus = (e) => {
-    e.preventDefault();
-    setProductAmount((prev) => (prev > 1 ? prev - 1 : prev));
-  };
-
-  const counterPlus = (e) => {
-    e.preventDefault();
-    setProductAmount((prev) => prev + 1);
-  };
-
-  //   Handle option click
-  const optionChange = (title, singleOption) => {
-    const newOptions = { ...productOptions };
-    newOptions[title] = singleOption;
-    setProductOptions(newOptions);
-  };
-
-  // Handle buy btn
-  const buyHandler = (e) => {
-    e.preventDefault();
-
-    const orderInfo = {
-      orderProdId: id,
-      orderOptions: productOptions,
-      orderAmount: productAmount,
-      orderPrice: specialPrice || price,
-      orderCost: specialPrice || price * productAmount,
-    };
-
-    addToCart(orderInfo);
-    setProductAmount(1);
-    setProductOptions(initialOptions);
-  };
-
-  //   Set Initial options
-  React.useEffect(() => {
-    setProductOptions(initialOptions);
-  }, []);
+  const { weight, price, specialPrice, tags } = variantData;
 
   return (
     <div key={id} className="col-md-6 col-xl-4">
       <div className="product-card">
         <div className="card-badges">
-          {tags.map((tag, ind) => {
-            let tagClass = "card-badge";
+          {tags
+            ? tags.map((tag, ind) => {
+                let tagClass = "card-badge";
 
-            switch (tag) {
-              case "Акция":
-                tagClass += " card-badge--sale";
-                break;
-              case "Популярное":
-                tagClass += " card-badge--favorite";
-                break;
-              default:
-                tagClass += " card-badge--new";
-                break;
-            }
+                switch (tag) {
+                  case "Акция":
+                    tagClass += " card-badge--sale";
+                    break;
+                  case "Популярное":
+                    tagClass += " card-badge--favorite";
+                    break;
+                  default:
+                    tagClass += " card-badge--new";
+                    break;
+                }
 
-            return (
-              <span key={ind} className={tagClass}>
-                {tag}
-              </span>
-            );
-          })}
+                return (
+                  <span key={ind} className={tagClass}>
+                    {tag}
+                  </span>
+                );
+              })
+            : null}
         </div>
 
         <form>
@@ -109,7 +65,39 @@ const ProductListCard = ({ product }) => {
           <div className="product-card__deskrip">
             <p>{ingredients.join(", ")}</p>
 
-            {options.map(({ title, options }, ind) => {
+            {Object.keys(options).map((option, ind) => {
+              const optionValues = options[option];
+
+              return (
+                <div key={ind} className="product-card__filters">
+                  <span className="filter-name">{option}:</span>
+                  <div className="filters-type">
+                    {optionValues.map((singleOption, optInd) => {
+                      return (
+                        <div key={optInd} className="filters-type__item">
+                          <label>
+                            <input
+                              type="radio"
+                              name={option}
+                              value={singleOption}
+                              checked={singleOption === curOptions[option]}
+                              onChange={() =>
+                                updateCurOptions(option, singleOption)
+                              }
+                            />
+                            <div className="fake-radiobutton">
+                              {singleOption}
+                            </div>
+                          </label>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+
+            {/* {options.map(({ title, options }, ind) => {
               return (
                 <div key={ind} className="product-card__filters">
                   <span className="filter-name">{title}</span>
@@ -135,7 +123,7 @@ const ProductListCard = ({ product }) => {
                   </div>
                 </div>
               );
-            })}
+            })} */}
           </div>
 
           <div className="product-card__addition"></div>
@@ -162,15 +150,11 @@ const ProductListCard = ({ product }) => {
                 >
                   -
                 </button>
-                <span className="product-counter--num">{productAmount}</span>
+                <span className="product-counter--num">{amount}</span>
                 <button className="product-counter--plus" onClick={counterPlus}>
                   +
                 </button>
-                <input
-                  type="hidden"
-                  name="product_count"
-                  value={productAmount}
-                />
+                <input type="hidden" name="product_count" value={amount} />
               </div>
             </div>
             <div className="product-card__buttons">
@@ -190,4 +174,4 @@ const ProductListCard = ({ product }) => {
   );
 };
 
-export default ProductListCard;
+export default React.memo(ProductListCard);

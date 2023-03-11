@@ -24,4 +24,4 @@ const ProductListControl = ({
   );
 };
 
-export default ProductListControl;
+export default React.memo(ProductListControl);

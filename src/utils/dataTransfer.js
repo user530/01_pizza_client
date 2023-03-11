@@ -1,7 +1,7 @@
-export async function getProductTypes() {
+export async function getProductTypes(setterCB, signal) {
   const prodTypesURL = "/api/v1/product_types";
 
-  const response = await fetch(prodTypesURL);
+  const response = await fetch(prodTypesURL, { signal });
   const data = await response.json();
 
   try {
@@ -10,13 +10,42 @@ export async function getProductTypes() {
         id,
         typeName,
       }));
-      return prodTypes;
-    }
-
-    return [];
+      setterCB(prodTypes);
+    } else setterCB([]);
   } catch (error) {
     throw new Error(
       "В процессе загрузки типов продуктов произошла ошибка, пожалуйста, повторите запрос позже."
+    );
+  }
+}
+
+export async function getSelectedProducts(productType, setterCB, signal) {
+  const productsURL = `/api/v1/products/new/${productType}`;
+
+  const response = await fetch(productsURL, { signal });
+  const data = await response.json();
+
+  try {
+    if (data.success) {
+      const products = data.data;
+      const newProducts = products.map(
+        ({ _id: id, name, productType, ingredients, img, variants }) => {
+          return {
+            id,
+            name,
+            productType,
+            ingredients,
+            img,
+            variants,
+          };
+        }
+      );
+
+      setterCB(newProducts);
+    } else setterCB([]);
+  } catch (error) {
+    throw Error(
+      "В процессе загрузки продуктов произошла ошибка, пожалуйста, повторите запрос позже."
     );
   }
 }
