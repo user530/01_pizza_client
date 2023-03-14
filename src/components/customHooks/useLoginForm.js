@@ -8,10 +8,11 @@ const useLoginForm = (validator, callback) => {
   const [formValues, setFormValues] = React.useState({
     login: "",
     password: "",
+    anonymousCart: sessionStorage.getItem("cart"),
   });
   const [unauthorized, setUnauthorized] = React.useState(false);
   const [errors, setErrors] = React.useState({});
-  const { setUser } = useAppContext();
+  const { setUser, setCart } = useAppContext();
 
   const navigate = useNavigate();
 
@@ -41,8 +42,13 @@ const useLoginForm = (validator, callback) => {
     if (login && password && Object.keys(errors).length === 0) {
       callback(formValues, abortController.signal)
         .then((res) => {
-          setUser(res.data.user);
-          // LOAD CART
+          const { user } = res.data;
+          setUser(user);
+          // Load cart
+          setCart(user.cart.products);
+          // Clear anonymous session
+          sessionStorage.removeItem("cart");
+          // Change authorization flag
           setUnauthorized(false);
           // Redirect back to the previous page
           navigate(-1);

@@ -2,7 +2,7 @@ import React from "react";
 
 const useProductListContent = (products) => {
   const [isEmpty, setIsEmpty] = React.useState(true);
-  const [cardsPerList, setCardsPerList] = React.useState(4);
+  const [cardsPerList] = React.useState(4);
   const [pages, setPages] = React.useState(null);
   const [curPage, setCurPage] = React.useState(1);
   const [visibleProducts, setVisibleProducts] = React.useState([]);

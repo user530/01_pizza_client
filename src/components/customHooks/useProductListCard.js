@@ -83,8 +83,8 @@ const useProductListCard = (product) => {
     const initOpts = initialOptions();
 
     const orderInfo = {
-      id,
-      variantId,
+      product: id,
+      variant: variantId,
       amount: productAmount,
       price: specialPrice || price,
       total: (specialPrice || price) * productAmount,
