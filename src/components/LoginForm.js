@@ -21,6 +21,7 @@ const LoginForm = () => {
               errors.login || unauthorized ? "incorrect" : ""
             }`}
             onChange={handleInput}
+            placeholder="Логин"
           />
 
           {errors.login || unauthorized ? (
@@ -36,6 +37,7 @@ const LoginForm = () => {
               errors.password || unauthorized ? "incorrect" : ""
             }`}
             onChange={handleInput}
+            placeholder="Пароль"
           />
 
           {errors.password || unauthorized ? (
@@ -43,7 +45,13 @@ const LoginForm = () => {
           ) : null}
         </div>
 
-        <input type="submit" value={"Вход"} />
+        <div className="form-group form-group--btn">
+          <input
+            className="page-button page-button--yellow"
+            type="submit"
+            value="Вход"
+          />
+        </div>
       </form>
 
       {unauthorized ? (

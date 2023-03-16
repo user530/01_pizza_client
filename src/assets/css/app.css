@@ -1563,8 +1563,8 @@ input:-webkit-autofill {
     box-shadow: 0px 0px 1px rgba(31, 31, 31, 0.35);
     border-radius: 4px;
     border: 1px solid #939393;
-    /* background-image: url(../img/main/check.png); */
-    background-size: auto;
+    background-image: url(../img/auth/checkmark.png);
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center -15px;
     -webkit-transition: 0.3s ease-out;

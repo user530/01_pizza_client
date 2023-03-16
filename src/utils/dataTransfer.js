@@ -126,17 +126,32 @@ export async function sendContactForm(data, signal) {
 export async function login(formData, signal) {
   const loginURL = "/api/v1/auth/login";
 
-  const response = await fetch(
-    loginURL,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+  const response = await fetch(loginURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
     },
-    { signal }
-  );
+    body: JSON.stringify(formData),
+    signal,
+  });
+
+  const data = await response.json();
+
+  if (data.success) return data;
+  else throw new Error(data.error.message);
+}
+
+export async function register(formData, signal) {
+  const registerURL = "/api/v1/auth/register";
+
+  const response = await fetch(registerURL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+    signal,
+  });
 
   const data = await response.json();
 

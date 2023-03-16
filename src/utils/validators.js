@@ -79,3 +79,63 @@ export const loginValidation = (formValues) => {
 
   return loginErrors;
 };
+
+export const registrationValidation = (formValues, permissionFlag) => {
+  try {
+    // Clear form values
+    Object.keys(formValues).forEach(
+      (key) => (formValues[key] = formValues[key].toString().trim())
+    );
+
+    // Destructure them
+    const { login, password, name, email, phone } = formValues;
+
+    // Prepare err object
+    let errors = {};
+
+    // Check login
+    if (!login) errors.login = "Пожалуйста, введите логин!";
+    else if (!/^\S{3,16}$/.test(login))
+      errors.login =
+        "Логин должен содержать от 3 до 16 символов и не включать пробелы.";
+
+    // Check password
+    if (!password) errors.password = "Пожалуйста, введите пароль!";
+    else if (
+      !/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&])[A-z\d!@#$%^&]{6,}$/.test(
+        password
+      )
+    )
+      errors.password =
+        "Пароль должен быть не меньше 6 символов и содержать как минимум одну заглавную и одну прописную букву, одну цифру и один спец символ. Допустимы символы латинского алфавита, цифры и специальные символы(!,@,#,$,%,^,&).";
+
+    // Check name
+    if (!name) errors.name = "Пожалуйста, введите имя!";
+    else if (!/^[ЁёА-я]{2,20}$/.test(name))
+      errors.name = "Имя должно содержать от 2 до 20 букв русского алфавита.";
+
+    // Check email
+    if (!email) errors.email = "Пожалуйста, введите адрес почты!";
+    else if (
+      !/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+        email
+      )
+    )
+      errors.email = "Указан некорректный формат почтового адреса.";
+
+    // Check phone
+    if (!phone) errors.phone = "Пожалуйста, введите номер телефона";
+    else if (!/^\d{11}$/.test(phone))
+      errors.phone =
+        "Номер телефона должен содержать 11 цифр без специальных символов.";
+
+    // Check permission flag
+    if (!permissionFlag)
+      errors.permission =
+        "Пожалуйста, дайте согласие на обработку личных данных!";
+
+    return errors;
+  } catch (error) {
+    throw new Error("Некорректные данные регистрации!");
+  }
+};

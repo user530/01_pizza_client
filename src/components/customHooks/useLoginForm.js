@@ -59,7 +59,7 @@ const useLoginForm = (validator, callback) => {
         });
     }
 
-    return abortController.abort();
+    return () => abortController.abort();
   }, [errors]);
 
   return { formValues, handleInput, handleSubmit, errors, unauthorized };

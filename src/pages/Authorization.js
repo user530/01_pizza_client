@@ -15,9 +15,7 @@ const Authorization = () => {
             </div>
             <div className="col-md-6">
               <div className="forms-wrapper__col forms_col--reg">
-                <div className="forms-wrapper__col">
-                  <RegisterForm />
-                </div>
+                <RegisterForm />
               </div>
             </div>
             <div className="col-md-6"></div>
