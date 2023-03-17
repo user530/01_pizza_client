@@ -9,14 +9,10 @@ const Authorization = () => {
         <div className="forms-wrapper">
           <div className="row">
             <div className="col-md-6">
-              <div className="forms-wrapper__col">
-                <LoginForm />
-              </div>
+              <LoginForm />
             </div>
             <div className="col-md-6">
-              <div className="forms-wrapper__col forms_col--reg">
-                <RegisterForm />
-              </div>
+              <RegisterForm />
             </div>
             <div className="col-md-6"></div>
           </div>

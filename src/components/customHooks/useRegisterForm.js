@@ -35,6 +35,21 @@ const useRegisterForm = (validator, fetchCb) => {
     setSuccess(null);
   };
 
+  // Clear form
+  const clearForm = () => {
+    // Create object with empty values
+    const clearForm = Object.keys(formValues).reduce((object, key) => {
+      object[key] = "";
+      return object;
+    }, {});
+
+    // Reset form values
+    setFormValues(clearForm);
+
+    // Reset permission flag
+    permissionRef.current.checked = false;
+  };
+
   React.useEffect(() => {
     const controller = new AbortController();
 
@@ -59,6 +74,9 @@ const useRegisterForm = (validator, fetchCb) => {
 
         // Set success flag
         setSuccess(data.message);
+
+        // Clear form
+        clearForm();
       } catch (error) {
         setIsFailed(error.message);
       }
@@ -76,6 +94,8 @@ const useRegisterForm = (validator, fetchCb) => {
     errors,
     permissionRef,
     success,
+    setSuccess,
+    formValues,
   };
 };
 

@@ -10,7 +10,7 @@ const LoginForm = () => {
   );
 
   return (
-    <>
+    <div className="forms-wrapper__col">
       <h3>Авторизация:</h3>
       <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group form-field">
@@ -59,7 +59,7 @@ const LoginForm = () => {
           <span>Авторизация провалилась, проверьте ваши данные.</span>
         </div>
       ) : null}
-    </>
+    </div>
   );
 };
 
